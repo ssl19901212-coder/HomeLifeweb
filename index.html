@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>理想家居生活館 | 現代簡約風格</title>
+    <!-- Tailwind CSS v3 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- 统一的 Tailwind 配置 -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#8B7355',
+                        secondary: '#D2B48C',
+                        neutral: {
+                            100: '#F5F5DC',
+                            200: '#DEB887',
+                            300: '#CD853F',
+                            800: '#2F4F4F',
+                            900: '#1A1A1A'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'elegant': '0 4px 20px rgba(0, 0, 0, 0.05)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .text-shadow-sm {
+                text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            }
+            .transition-all-300 {
+                transition: all 300ms ease-in-out;
+            }
+            .hover-scale {
+                transition: transform 0.3s ease;
+            }
+            .hover-scale:hover {
+                transform: scale(1.03);
+            }
+        }
+        
+        /* 自定义样式 */
+        body {
+            background-color: #FAFAFA;
+            font-family: 'Inter', system-ui, sans-serif;
+        }
+        
+        .hero-section {
+            background-color: #FAFAFA;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%238B7355' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            z-index: 0;
+        }
+        
+        .product-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .category-title {
+            font-weight: 600;
+            color: #333;
+            position: relative;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+        }
+        
+        .category-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: #8B7355;
+        }
+        
+        .sidebar {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            padding: 2rem;
+        }
+        
+        .tip-box {
+            background-color: #2F4F4F;
+            color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .tip-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 120px;
+            height: 120px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='0.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cpath d='M12 8v4l3 3'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: center;
+            opacity: 0.1;
+        }
+        
+        .footer {
+            background-color: #1A1A1A;
+            color: #FAFAFA;
+            padding: 2rem 0;
+        }
+        
+        .nav-link {
+            color: #333;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #8B7355;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .active-nav::after {
+            width: 100%;
+        }
+        
+        /* 响应式调整 */
+        @media (max-width: 768px) {
+            .sidebar {
+                margin-bottom: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center">
+                <div class="text-6xl font-bold text-primary">理想家居生活館</div>
+            </div>
+            
+            <nav class="hidden md:flex space-x-8">
+                <a href="#" class="nav-link active-nav">首页</a>
+                <a href="#" class="nav-link">產品</a>
+                <a href="#" class="nav-link">靈感</a>
+                <a href="#" class="nav-link">關於我們</a>
+            </nav>
+            
+            <div class="flex items-center space-x-4">
+                <button class="p-2 rounded-full hover:bg-gray-100 transition-all-300">
+                    <i class="fa fa-search text-gray-600"></i>
+                </button>
+                <button class="p-2 rounded-full hover:bg-gray-100 transition-all-300">
+                    <i class="fa fa-user text-gray-600"></i>
+                </button>
+                <button class="p-2 rounded-full hover:bg-gray-100 transition-all-300 md:hidden">
+                    <i class="fa fa-bars text-gray-600"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主要内容区域 -->
+    <main class="container mx-auto px-4 py-8">
+        <div class="flex flex-col md:flex-row gap-8">
+            <!-- 左侧内容区 -->
+            <div class="w-full md:w-2/3">
+                <!-- 英雄区域 -->
+                <section class="hero-section mb-12 rounded-xl overflow-hidden relative">
+                    <div class="relative z-10 flex flex-col md:flex-row items-center">
+                        <div class="w-full md:w-1/2 p-6 md:p-12">
+                            <h1 class="text-4xl md:text-5xl font-bold mb-4 text-neutral-900">Custom<br>Interior<br>Design</h1>
+                            <p class="text-gray-600 mb-8 max-w-md">打造專屬于于您的現代簡約風格家居，讓每一個空間都充滿溫馨與舒適。</p>
+                            <button class="bg-primary text-white px-6 py-3 rounded-md hover:bg-opacity-90 transition-all-300">
+                                了解更多
+                            </button>
+                        </div>
+                        <div class="w-full md:w-1/2 p-18">
+                            <img src="https://p11-doubao-search-sign.byteimg.com/labis/6c87ee233503d99c0b543646b4ae0ff7~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1777534085&x-signature=ppZzNILgACWfRzS66RezGyAcb5M%3D" 
+                                 alt="現代簡約沙發" 
+                                 class="rounded-lg shadow-elegant hover-scale w-full h-auto object-cover">
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 产品展示区 -->
+                <section class="mb-12">
+                    <h2 class="category-title">我們的產品</h2>
+                    <h2 class="category-title">Our Products</h2>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- 产品卡片 1 -->
+                        <div class="product-card hover-scale">
+                            <img src="https://p11-doubao-search-sign.byteimg.com/labis/101c93a6ffd2208b6c75808465d74a98~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1777534085&x-signature=1%2FkkNITXjbFBE8L%2FyGjzCHFrCD4%3D" 
+                                 alt="现代简约沙发" 
+                                 class="w-full h-50 object-cover">
+                            <div class="p-4">
+                                <h3 class="font-semibold text-lg mb-2">北歐風格沙發組合</h3>
+                                <p class="text-gray-600 text-sm mb-3">舒適布藝，簡約設計，適合各種家居風格</p>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-primary font-bold">NT$18,999</span>
+                                    <button class="text-sm bg-gray-100 hover:bg-gray-200 px-3 py-1 rounded transition-all-300">
+                                        查看詳情
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 产品卡片 2 -->
+                        <div class="product-card hover-scale">
+                            <img src="https://p11-doubao-search-sign.byteimg.com/labis/ebf52db35421b4492fe4053d10e67318~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1777534078&x-signature=qdmjs8V%2FckAsY6Cu3kilHsPYLzg%3D" 
+                                 alt="现代简约灯具" 
+                                 class="w-full h-50 object-cover">
+                            <div class="p-4">
+                                <h3 class="font-semibold text-lg mb-2">幾何極簡吊燈</h3>
+                                <p class="text-gray-600 text-sm mb-3">LED光源，節能省電，現代感十足</p>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-primary font-bold">NT$3,899</span>
+                                    <button class="text-sm bg-gray-100 hover:bg-gray-200 px-3 py-1 rounded transition-all-300">
+                                        查看詳情
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 产品卡片 3 -->
+                        <div class="product-card hover-scale">
+                            <img src="https://p3-doubao-search-sign.byteimg.com/labis/image/511279053cd302c28dded1b15d74ede4~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1777534078&x-signature=Z1fvQxstCXqXesyMBHNbT0xo4fM%3D" 
+                                 alt="现代简约装饰品" 
+                                 class="w-full h-50 object-cover">
+                            <div class="p-4">
+                                <h3 class="font-semibold text-lg mb-2">北歐風格擺件組合</h3>
+                                <p class="text-gray-600 text-sm mb-3">金屬材質，精緻工藝，提升空間格調</p>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-primary font-bold">NT$1,399</span>
+                                    <button class="text-sm bg-gray-100 hover:bg-gray-200 px-3 py-1 rounded transition-all-300">
+                                        查看詳情
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 礼品推荐区 -->
+                <section class="mb-12">
+                    <h2 class="category-title">家居禮品創意</h2>
+                    <h2 class="category-title">Gift Ideas For Home</h2>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <!-- 礼品卡片 1 -->
+                        <div class="product-card hover-scale">
+                            <img src="https://bloomthis.co/cdn/shop/files/bloomthis-chinese-new-year-hat-box-flourishing-wealth-chinese-new-year-flower-box-1080x1080-01.jpg?v=1704405779&width=1000" 
+                                 alt="装饰花束" 
+                                 class="w-full h-50  object-cover">
+                            <div class="p-4">
+                                <h3 class="font-semibold text-lg mb-2">仿真花束裝飾</h3>
+                                <p class="text-gray-600 text-sm mb-3">無需養護，持久美觀，增添生活氣息</p>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-primary font-bold">NT$1,299</span>
+                                    <button class="text-sm bg-gray-100 hover:bg-gray-200 px-3 py-1 rounded transition-all-300">
+                                        查看詳情
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 礼品卡片 2 -->
+                        <div class="product-card hover-scale">
+                            <img src="https://i.pinimg.com/1200x/bd/72/16/bd72166179f98cf8153b53de8b1e14cc.jpg" 
+                                 alt="艺术摆件" 
+                                 class="w-full h-50 object-cover">
+                            <div class="p-4">
+                                <h3 class="font-semibold text-lg mb-2">現代藝術擺件</h3>
+                                <p class="text-gray-600 text-sm mb-3">抽象設計，高級感十足，提升空間藝術氛圍</p>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-primary font-bold">NT$1,499</span>
+                                    <button class="text-sm bg-gray-100 hover:bg-gray-200 px-3 py-1 rounded transition-all-300">
+                                        查看詳情
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 热门产品区 -->
+                <section class="mb-12">
+                    <h2 class="category-title">看看熱門產品</h2>
+                    <h2 class="category-title">See What's Popular</h2>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <!-- 热门产品 1 -->
+                        <div class="product-card hover-scale">
+                            <img src="https://p11-doubao-search-sign.byteimg.com/labis/6081ad711e91b74ec7bcc7e0b5754c11~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1777534078&x-signature=4SVqGpzuXtJpAdeN6qePLVni0Wk%3D" 
+                                 alt="现代简约吊灯" 
+                                 class="w-full h-48 object-cover">
+                            <div class="p-3">
+                                <h3 class="font-medium text-sm mb-1">現代簡約吊燈</h3>
+                                <span class="text-primary font-bold text-sm">NT$8,699</span>
+                            </div>
+                        </div>
+                        
+                        <!-- 热门产品 2 -->
+                        <div class="product-card hover-scale">
+                            <img src="https://i.pinimg.com/1200x/cb/be/27/cbbe27de0f708e7316d05d20b333533f.jpg" 
+                                 alt="客厅大灯" 
+                                 class="w-full h-48 object-cover">
+                            <div class="p-3">
+                                <h3 class="font-medium text-sm mb-1">客廳大燈</h3>
+                                <span class="text-primary font-bold text-sm">NT$4,299</span>
+                            </div>
+                        </div>
+                        
+                        <!-- 热门产品 3 -->
+                        <div class="product-card hover-scale">
+                            <img src="https://i.pinimg.com/1200x/29/30/48/2930480b1dd4ead00538d5acc4b9bccc.jpg" 
+                                 alt="创意吊灯" 
+                                 class="w-full h-48 object-cover">
+                            <div class="p-3">
+                                <h3 class="font-medium text-sm mb-1">創意吊燈</h3>
+                                <span class="text-primary font-bold text-sm">NT$2,899</span>
+                            </div>
+                        </div>
+                        
+                        <!-- 热门产品 4 -->
+                        <div class="product-card hover-scale">
+                            <img src="https://i.pinimg.com/736x/ea/0d/67/ea0d67f1c27c9a7e90a3eb97fdbf9825.jpg" 
+                                 alt="陶瓷花瓶" 
+                                 class="w-full h-48 object-cover">
+                            <div class="p-3">
+                                <h3 class="font-medium text-sm mb-1">陶瓷花瓶</h3>
+                                <span class="text-primary font-bold text-sm">NT$1,599</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 联系我们区 -->
+                <section class="mb-12">
+                    <h2 class="category-title">與我們的職員交談</h2>
+                    <h2 class="category-title">Talk To Our Staff</h2>
+                    
+                    <div class="bg-white rounded-xl shadow-elegant p-6 md:p-8">
+                        <div class="flex flex-col md:flex-row gap-8">
+                            <div class="w-full md:w-1/2">
+                                <h3 class="text-xl font-semibold mb-4">聯繫我們</h3>
+                                <p class="text-gray-600 mb-6">
+                                    無論您有任何關於家居設計的問題或需求，我們的專業團隊都將為您提供最貼心的服務和建議。
+                                </p>
+                                <div class="space-y-4">
+                                    <div class="flex items-center">
+                                        <i class="fa fa-map-marker text-primary mr-3"></i>
+                                        <span>桃園市中壢區發財路88號</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <i class="fa fa-phone text-primary mr-3"></i>
+                                        <span>400-123-4567</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <i class="fa fa-envelope text-primary mr-3"></i>
+                                        <span>info@homeliving.com</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="w-full md:w-1/2">
+                                <form class="space-y-4">
+                                    <div>
+                                        <label for="name" class="block text-sm font-medium text-gray-700 mb-1">姓名</label>
+                                        <input type="text" id="name" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                                    </div>
+                                    <div>
+                                        <label for="email" class="block text-sm font-medium text-gray-700 mb-1">郵箱</label>
+                                        <input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                                    </div>
+                                    <div>
+                                        <label for="message" class="block text-sm font-medium text-gray-700 mb-1">留言</label>
+                                        <textarea id="message" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"></textarea>
+                                    </div>
+                                    <button type="submit" class="w-full bg-primary text-white py-2 px-4 rounded-md hover:bg-opacity-90 transition-all-300">
+                                        發送
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- 右侧提示区 -->
+            <div class="w-full md:w-1/3">
+                <div class="sidebar sticky top-24">
+                    <div class="tip-box mb-6">
+                        <h3 class="text-xl font-semibold mb-4 flex items-center">
+                            <i class="fa fa-lightbulb-o mr-2"></i>
+                            關於我們：用簡約，定義理想的家
+                        </h3>
+                        <div class="space-y-4 text-sm">
+                            <p>理想家居館，誕生于對 “舒適生活” 的初心 —— 我們相信，好的家居不是堆砌的華麗，而是刪繁就簡后的恰到好處。​
+在這里，您能找到從客廳到臥室、從玄關到陽臺的全景家居解決方案：線條利落的實木餐桌，承托日常三餐的煙火；軟硬度適中的布藝沙發，包容每個放鬆的午後；兼具收納與顏值的置物櫃，藏起瑣碎，留出整潔。每一件產品都經過材質篩選與工藝打磨，在 “好看” 與 “好用” 之間找到平衡，讓簡約設計融入日常，不刻意，缺處處貼心。​
+我們不追逐轉瞬即逝的潮流，只專注於長久陪伴的質感。無論是租屋改造的小空間，還是新房裝修的整體搭配，都能在這裡找到適合的選擇 —— 畢竟，家的美好，從來都與面積無關，只與 “舒服” 有關。</p>
+                            <p>為什麼選擇我們？​</p>
+                            <p>▪簡約不簡單：拒絕冗余裝飾，注重功能與美學的統一，讓居家成為生活的背景，而非負擔。​</p>
+                            <p>▪質感看得見：優選環保板材、耐磨面料、穩固五金，從細節處保障使用體驗，經得起時間檢驗。​</p>
+                            <p>▪服務更省心：提供免費上門量尺、搭配建議，售後安裝與維護及時響應，讓選家居像選衣服一樣輕鬆。</p>
+                            <p>來這里，遇見您的理想之家！</p>
+                            <p>線上點選「產品系列」，瀏覽更多簡約家居靈感；線下預約到店，親手觸摸材質，感受家具在空間裡的真實模樣。</p>
+                            <p>理想家居館，願陪你把日子過成想要的樣子 —— 簡單，卻滿是歡喜。</p>
+                        </div>
+                    </div>
+                    
+                    <!-- AI助手区域 -->
+                    <div class="bg-gray-50 rounded-lg p-4 mb-6">
+                        <h3 class="text-lg font-semibold mb-3 flex items-center">
+                            <i class="fa fa-robot text-primary mr-2"></i>
+                            AI設計助手
+                        </h3>
+                        <p class="text-sm text-gray-600 mb-3">需要家居設計建議？我們的AI助手可以幫您！</p>
+                        <div class="flex">
+                            <input type="text" placeholder="描述您的需求..." class="flex-1 px-3 py-2 text-sm border border-gray-300 rounded-l-md focus:outline-none focus:ring-1 focus:ring-primary">
+                            <button class="bg-primary text-white px-3 py-2 rounded-r-md hover:bg-opacity-90 transition-all-300">
+                                <i class="fa fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- 热门标签 -->
+                    <div class="mb-6">
+                        <h3 class="text-lg font-semibold mb-3">熱門標籤</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-gray-100 text-gray-700 text-xs px-3 py-1 rounded-full hover:bg-primary hover:text-white transition-all-300 cursor-pointer">现代简约</span>
+                            <span class="bg-gray-100 text-gray-700 text-xs px-3 py-1 rounded-full hover:bg-primary hover:text-white transition-all-300 cursor-pointer">北欧风格</span>
+                            <span class="bg-gray-100 text-gray-700 text-xs px-3 py-1 rounded-full hover:bg-primary hover:text-white transition-all-300 cursor-pointer">客厅设计</span>
+                            <span class="bg-gray-100 text-gray-700 text-xs px-3 py-1 rounded-full hover:bg-primary hover:text-white transition-all-300 cursor-pointer">卧室装饰</span>
+                            <span class="bg-gray-100 text-gray-700 text-xs px-3 py-1 rounded-full hover:bg-primary hover:text-white transition-all-300 cursor-pointer">餐厅灯具</span>
+                            <span class="bg-gray-100 text-gray-700 text-xs px-3 py-1 rounded-full hover:bg-primary hover:text-white transition-all-300 cursor-pointer">家居摆件</span>
+                            <span class="bg-gray-100 text-gray-700 text-xs px-3 py-1 rounded-full hover:bg-primary hover:text-white transition-all-300 cursor-pointer">幾何極簡</span>
+                        </div>
+                    </div>
+                    
+                    <!-- 订阅区域 -->
+                    <div class="bg-neutral-800 text-white rounded-lg p-4">
+                        <h3 class="text-lg font-semibold mb-3">訂閱我們</h3>
+                        <p class="text-sm text-gray-300 mb-3">獲取最新的家居設計靈感和獨家優惠</p>
+                        <div class="flex flex-col space-y-2">
+                            <input type="email" placeholder="您的邮箱地址" class="px-3 py-2 text-sm border border-gray-600 rounded-md bg-neutral-700 text-white placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-primary">
+                            <button class="bg-primary text-white px-3 py-2 rounded-md hover:bg-opacity-90 transition-all-300 text-sm">
+                                訂閱
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between">
+                <div class="mb-6 md:mb-0">
+                    <h3 class="text-xl font-bold mb-4">理想家居生活館</h3>
+                    <p class="text-gray-400 max-w-xs color-#fff">
+                        打造專屬于您的現代简约風格家居，让每一个空间都充满温馨与舒适。
+                    </p>
+                </div>
+                
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-8">
+                    <div>
+                        <h4 class="text-lg font-semibold mb-4">產品</h4>
+                        <ul class="space-y-2 text-gray-400">
+                            <li><a href="#" class="hover:text-white transition-all-300">沙發</a></li>
+                            <li><a href="#" class="hover:text-white transition-all-300">燈具</a></li>
+                            <li><a href="#" class="hover:text-white transition-all-300">裝飾品</a></li>
+                            <li><a href="#" class="hover:text-white transition-all-300">傢具套裝</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h4 class="text-lg font-semibold mb-4">服務</h4>
+                        <ul class="space-y-2 text-gray-400">
+                            <li><a href="#" class="hover:text-white transition-all-300">設計諮詢</a></li>
+                            <li><a href="#" class="hover:text-white transition-all-300">定製服務</a></li>
+                            <li><a href="#" class="hover:text-white transition-all-300">配送安裝</a></li>
+                            <li><a href="#" class="hover:text-white transition-all-300">售後服務</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h4 class="text-lg font-semibold mb-4">關於我們</h4>
+                        <ul class="space-y-2 text-gray-400">
+                            <li><a href="#" class="hover:text-white transition-all-300">品牌故事</a></li>
+                            <li><a href="#" class="hover:text-white transition-all-300">門店地址</a></li>
+                            <li><a href="#" class="hover:text-white transition-all-300">招賢納士</a></li>
+                            <li><a href="#" class="hover:text-white transition-all-300">聯繫我們</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <div class="text-gray-400 text-sm mb-4 md:mb-0">
+                    &copy; 2026 理想家居生活館 保留所有權利.
+                </div>
+                
+                <div class="flex space-x-4">
+                    <a href="#" class="text-gray-400 hover:text-white transition-all-300">
+                        <i class="fa fa-weixin text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-all-300">
+                        <i class="fa fa-weibo text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-all-300">
+                        <i class="fa fa-instagram text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-all-300">
+                        <i class="fa fa-pinterest text-xl"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // 导航菜单激活状态
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // 移除所有激活状态
+                    navLinks.forEach(item => item.classList.remove('active-nav'));
+                    
+                    // 添加当前激活状态
+                    this.classList.add('active-nav');
+                });
+            });
+            
+            // 产品卡片点击事件
+            const productCards = document.querySelectorAll('.product-card');
+            
+            productCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    // 获取产品名称
+                    const productName = this.querySelector('h3').textContent;
+                    
+                    // 显示产品详情弹窗
+                    alert(`您點擊了: ${productName}\n\n產品詳情功能即將上線，敬請期待！`);
+                });
+            });
+            
+            // AI助手表单提交
+            const aiForm = document.querySelector('.bg-gray-50 .flex');
+            const aiInput = aiForm.querySelector('input');
+            
+            aiForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const userInput = aiInput.value.trim();
+                
+                if (userInput) {
+                    // 模拟AI回复
+                    alert(`您的需求: ${userInput}\n\nAI助手: 感謝您的諮詢！我們的設計顧問將根據您的需求提供專業建議，預計在24小時內與您聯繫。`);
+                    
+                    // 清空输入框
+                    aiInput.value = '';
+                } else {
+                    alert('請輸入您的需求');
+                }
+            });
+            
+            // 订阅表单提交
+            const subscribeForm = document.querySelector('.bg-neutral-800 .flex');
+            const subscribeInput = subscribeForm.querySelector('input');
+            
+            subscribeForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const email = subscribeInput.value.trim();
+                
+                if (email && validateEmail(email)) {
+                    // 模拟订阅成功
+                    alert(`感謝您的訂閱！我們將定期向 ${email} 發送最新資訊和優惠訊息。`);
+                    
+                    // 清空输入框
+                    subscribeInput.value = '';
+                } else {
+                    alert('請輸入有效的郵箱地址');
+                }
+            });
+            
+            // 联系表单提交
+            const contactForm = document.querySelector('.bg-white form');
+            
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const name = document.getElementById('name').value.trim();
+                const email = document.getElementById('email').value.trim();
+                const message = document.getElementById('message').value.trim();
+                
+                if (name && email && validateEmail(email) && message) {
+                    // 模拟表单提交成功
+                    alert(`感謝您的留言，${name}！我們將盡快回覆您。`);
+                    
+                    // 重置表单
+                    contactForm.reset();
+                } else {
+                    alert('請填寫所有必填字段，並確保郵箱地址有效');
+                }
+            });
+            
+            // 热门标签点击事件
+            const tags = document.querySelectorAll('.bg-gray-100');
+            
+            tags.forEach(tag => {
+                tag.addEventListener('click', function() {
+                    const tagText = this.textContent;
+                    alert(`您點擊了標籤: ${tagText}\n\n標籤篩選功能即將上線，敬請期待！`);
+                });
+            });
+            
+            // 邮箱验证函数
+            function validateEmail(email) {
+                const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return re.test(email);
+            }
+        });
+    </script>
+</body>
+</html>
